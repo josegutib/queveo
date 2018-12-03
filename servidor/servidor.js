@@ -26,7 +26,6 @@ app.get('/status', function(req,res){
 
 app.get('/peliculas/:id', function(req,res){
   const peliculaId = req.params.id;
-  // console.log(`pelicula:${peliculaId}`);
   getPelicula(peliculaId)
   .then(pelicula => {
     const respuesta = {
