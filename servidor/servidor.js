@@ -27,8 +27,8 @@ app.get('/status', function(req,res){
 app.get('/peliculas/:id', function(req,res){
   const peliculaId = req.params.id;
   getPelicula(peliculaId)
-  .then(pelicula => {
-    const respuesta = pelicula[0]
+  .then(peliculas => {
+    const respuesta = peliculas[0]
     res.json(respuesta)
   })
 
