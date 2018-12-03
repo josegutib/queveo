@@ -28,9 +28,7 @@ app.get('/peliculas/:id', function(req,res){
   const peliculaId = req.params.id;
   getPelicula(peliculaId)
   .then(pelicula => {
-    const respuesta = {
-      pelicula: pelicula
-    }
+    const respuesta = pelicula[0]
     res.json(respuesta)
   })
 
