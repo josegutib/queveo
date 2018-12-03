@@ -6,4 +6,7 @@ var connection = mysql.createConnection({
   database:"peliculasdb"
 });
 
-module.exports = connection;
+
+connection.connect()
+
+connection.end()

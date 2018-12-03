@@ -48,17 +48,12 @@ app.get('/peliculas/:id', function(req,res){
 
 app.get('/generos', function(req,res){
   getAllGeneros()
-  .then(generos => res.json(generos))
-  // const respuesta = {
-  //   generos:[
-  //     {
-  //       id:"1",
-  //       nombre:"accion"
-  //     }
-  //
-  //   ]
-  // }
-  // res.json(respuesta)
+  .then(generos => {
+    const respuesta = {
+      generos: generos
+    }
+    res.json(respuesta)
+  })
 })
 
 
