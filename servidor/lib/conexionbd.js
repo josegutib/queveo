@@ -1,4 +1,4 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 
 var connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
@@ -7,4 +7,19 @@ var connection = mysql.createConnection({
   database:process.env.MYSQL_DATABASE
 });
 
-module.exports = connection;
+function query(statement) {
+  return new Promise(function(resolve, reject) {
+    connection.query(statement, function(error, results, fields) {
+      if (error) {
+        reject(error)
+        return
+      }
+      resolve(results)
+    })
+  })
+}
+
+module.exports = {
+  connection,
+  query
+}
