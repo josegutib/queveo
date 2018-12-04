@@ -1,4 +1,6 @@
-const { query } = require('./lib/conexionbd');
+const conexionbd = require('../lib/conexionbd');
+const query = conexionbd.query
+const connection = conexionbd.connection
 
 const statement1 = 'select * from pelicula limit 5';
 const statement2 = 'select id, titulo from pelicula where id = 10';

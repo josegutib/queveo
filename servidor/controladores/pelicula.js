@@ -1,4 +1,6 @@
-const connection = require('../lib/conexionbd');
+const conexionbd = require('../lib/conexionbd');
+const query = conexionbd.query
+const connection = conexionbd.connection
 
 function getPelicula(id){
   return new Promise(function(resolve,reject){
