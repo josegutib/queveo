@@ -19,7 +19,5 @@ function query(statement) {
   })
 }
 
-module.exports = {
-  connection,
-  query
-}
+module.exports = connection;
+module.exports =  query;
