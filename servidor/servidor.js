@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { getAllGeneros } = require("./controladores/genero");
-const { getPelicula } = require("./controladores/pelicula");
+const { getPelicula, getPeliculas } = require("./controladores/pelicula");
 const { getActores } = require('./controladores/actor');
 
 const app = express();
@@ -54,18 +54,33 @@ app.get('/generos', function(req,res){
 
 
 app.get('/peliculas',function(req,res){
-  const respuesta = {
-    peliculas:[
-      {
-        poster:"http://tr.web.img4.acsta.net/c_215_290/pictures/bzp/01/15308.jpg",
-        trama:"Misión imposible es una serie de películas de acción estadounidense basada en la serie televisiva del mismo nombre. La serie es coproducida y protagonizada por Tom Cruise como Ethan Hunt",
-        titulo:"mision imposible",
-        id:"1"
-      }
-    ],
-    total:1
+  const pagina = parseInt(req.query.pagina)
+  const titulo = req.query.titulo
+  const genero = req.query.genero
+  const anio = parseInt(req.query.anio)
+  const cantidad = parseInt(req.query.cantidad)
+  const columna_orden = req.query.columna_orden
+  const tipo_orden = req.query.tipo_orden
+
+  const filtros = {
+    pagina,
+    genero,
+    anio,
+    cantidad,
+    columna_orden,
+    tipo_orden
   }
-  res.json(respuesta)
+
+  getPeliculas(filtros)
+  .then( peliculas => {
+    const respuesta = {
+      peliculas,
+      total: peliculas.length
+    }
+    res.json(respuesta)
+  })
+
+
 })
 
 
