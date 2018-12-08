@@ -1,15 +1,9 @@
-const connection = require('../lib/conexionbd');
+const conexionbd = require('../lib/conexionbd');
+const query = conexionbd.query
 
 function getPelicula(id){
-  return new Promise(function(resolve,reject){
-    connection.query(`select * from pelicula where id = ${id}`, function(error, results, fields){
-      if(error){
-        reject(error)
-        return
-      }
-      resolve(results)
-    })
-  })
+  return query( `select * from pelicula inner join genero on pelicula.genero_id = genero.id where pelicula.id=${id}`)
+  .then( resultados => resultados[0] )
 }
 
 module.exports = {

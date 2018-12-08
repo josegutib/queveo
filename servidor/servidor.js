@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { getAllGeneros } = require("./controladores/genero");
 const { getPelicula } = require("./controladores/pelicula");
+const { getActores } = require('./controladores/actor');
 
 const app = express();
 //seteamos el puerto en el cual va a escuchar los pedidos la aplicación
@@ -26,9 +27,15 @@ app.get('/status', function(req,res){
 
 app.get('/peliculas/:id', function(req,res){
   const peliculaId = req.params.id;
-  getPelicula(peliculaId)
-  .then(peliculas => {
-    const respuesta = peliculas[0]
+  Promise.all([
+    getPelicula(peliculaId),
+    getActores(peliculaId)
+  ])
+  .then( array => {
+    const respuesta = {
+      pelicula: array[0],
+      actores: array[1]
+    }
     res.json(respuesta)
   })
 
