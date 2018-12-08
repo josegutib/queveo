@@ -6,7 +6,7 @@ const statement2 = 'select id, titulo from pelicula where id = 10';
 const statement3 = 'select id, titulo, director from pelicula limit 6,3';
 const statement4 = 'select count(*) from pelicula';
 
-query(statement4)
+query(statement2)
 .then(resultados => {
-  console.log(resultados)
+  console.log(resultados[0])
 })
